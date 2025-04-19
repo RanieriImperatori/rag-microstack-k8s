@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qdrant
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/RanieriImperatori/rag-microstack-k8s.git
+    path: infra/src/helm-charts/vectorstore/charts/qdrant
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    namespace: learning
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PruneLast=true
+

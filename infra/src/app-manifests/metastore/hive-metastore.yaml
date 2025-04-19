@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hive-metastore
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/RanieriImperatori/rag-microstack-k8s.git
+    path: infra/src/helm-charts/metastore/hive-metastore
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    namespace: deepstore
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=background
+      - PruneLast=true
+    automated:
+      prune: true
+      selfHeal: true
+

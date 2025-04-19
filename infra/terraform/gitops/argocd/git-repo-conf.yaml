@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rag-stack
+  namespace: gitops
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  url: https://github.com/RanieriImperatori/rag-microstack-k8s.git
+  password: {{ .Values.gitops.gitopsRepoPassword | quote }}
+  username: {{ .Values.gitops.gitopsRepoUser | quote }}
+  
