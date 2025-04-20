@@ -7,7 +7,7 @@ variable "minikube_driver" {
 variable "minikube_cluster_name" {
   type        = string
   description = "Name of the cluster to be used"
-  default     = "k8s-minikube"
+  default     = "rag-microstack-k8s"
 }
 
 variable "minikube_addons" {

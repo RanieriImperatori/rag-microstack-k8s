@@ -9,9 +9,3 @@ dex:
 server:
   extraArgs:
     - --insecure
-
-configs:
-  secret:
-    argocdServerAdminPassword: "$2y$10$Y8QR5nZtcxVfJpxqlunDYO1msjxJ848a2t/vRwnfBqBhx27azUC7i"
-  cm:
-    application.resourceTrackingMethod: annotation+label

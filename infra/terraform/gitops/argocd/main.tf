@@ -6,13 +6,13 @@ resource "helm_release" "argocd" {
   create_namespace = var.argocd_create_namespace
   version          = var.argocd_version
   verify           = var.argocd_verify
-  # values         = [file("config.yaml")]
+  #values           = [file("config.yaml")]
 }
 
 resource "null_resource" "kubectl_apply" {
   depends_on = [helm_release.argocd]
 
   provisioner "local-exec" {
-    command = "kubectl apply -f git-repo-conf.yaml -n gitops"
+    command = "envsubst < git-repo-conf.yaml.tpl | kubectl apply -f -"
   }
 }
