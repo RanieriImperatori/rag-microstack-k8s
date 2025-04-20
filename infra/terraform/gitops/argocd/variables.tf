@@ -38,3 +38,15 @@ variable "argocd_verify" {
   default     = false
   description = "Whether to verify the chart before installation."
 }
+
+variable "github_user" {
+  type        = string
+  description = "GitHub username"
+  sensitive   = true
+}
+
+variable "github_token" {
+  type        = string
+  description = "GitHub personal access token"
+  sensitive   = true
+}
